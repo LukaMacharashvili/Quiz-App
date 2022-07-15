@@ -1,0 +1,60 @@
+<section>
+  <article *ngIf="!quizFinished" class="question-box">
+    <div class="question-txt-img-box">
+      <p>
+        {{ quiz?.quizQuestiions[questionIndex]?.question }}
+        <b>(Point: {{ quiz?.quizQuestiions[questionIndex]?.point }})</b>
+      </p>
+      <img
+        [src]="quiz?.quizQuestiions[questionIndex]?.image"
+        *ngIf="quiz?.quizQuestiions[questionIndex]?.image"
+      />
+    </div>
+    <div class="answers-box">
+      <ul>
+        <li
+          *ngFor="
+            let answer of quiz?.quizQuestiions[questionIndex]?.answers;
+            let answerIndex = index
+          "
+          (click)="onAnswerBtnClick(answer.correct, questionIndex)"
+        >
+          <b> {{ answerIndex }}: </b> {{ answer.txt }}
+        </li>
+      </ul>
+    </div>
+    <div class="arrow-btn-box">
+      <button
+        [disabled]="questionIndex == 0"
+        (click)="questionIndex = questionIndex - 1"
+        class="arrow-btn"
+      >
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+      <button
+        [disabled]="quiz?.quizQuestiions?.length - 1 == questionIndex"
+        (click)="questionIndex = questionIndex + 1"
+        class="arrow-btn"
+      >
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+    <div class="submit-box">
+      <button (click)="onQuizSubmit()" mat-raised-button color="primary">
+        Submit Quiz
+      </button>
+    </div>
+  </article>
+  <article *ngIf="quizFinished" class="quiz-finished-box">
+    <h2><b>Quiz Finished</b></h2>
+    <h3><b>Result:</b> {{ pointsEarned }} out of {{ this.quiz.maxPoint }}</h3>
+    <button
+      routerLink="/myprofile/foryou"
+      (click)="onQuizSubmit()"
+      mat-raised-button
+      color="primary"
+    >
+      Go Back To Home Page
+    </button>
+  </article>
+</section>

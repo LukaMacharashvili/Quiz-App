@@ -1,0 +1,20 @@
+header {
+  background-color: rgb(211, 211, 211);
+}
+
+.example-form-field {
+  max-width: 150px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+}
+
+nav div {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}

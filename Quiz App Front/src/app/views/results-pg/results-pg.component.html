@@ -1,0 +1,20 @@
+<div class="container">
+  <div *ngFor="let result of results" class="box">
+    <div class="imgBox">
+      <img [src]="result.image" alt="user profile picture" />
+    </div>
+    <div class="content">
+      <h2>
+        {{ result.username }} | Result : {{ result.result }}
+        <br />
+        <button
+          routerLink="/profile/{{ result.userId }}"
+          color="accent"
+          mat-button
+        >
+          View Profile
+        </button>
+      </h2>
+    </div>
+  </div>
+</div>

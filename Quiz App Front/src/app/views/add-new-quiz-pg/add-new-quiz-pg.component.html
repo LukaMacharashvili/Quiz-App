@@ -1,0 +1,204 @@
+<section class="create-new-quiz">
+  <h1>Create New Quiz</h1>
+  <br />
+  <br />
+  <form [formGroup]="quizForm" (ngSubmit)="onFormSubmit()" class="example-form">
+    <article class="container first-group">
+      <h2>Quiz Information</h2>
+      <mat-divider></mat-divider>
+      <div class="upload-pic-box">
+        <label>Upload Quiz Cover Photo</label>
+        <input (change)="onQuizCoverPicUpload($event)" type="file" />
+        <img *ngIf="coverPic" [src]="coverPic" />
+      </div>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Title</mat-label>
+        <input formControlName="title" matInput placeholder="Ex. test Quiz" />
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Expiration Date</mat-label>
+        <input
+          formControlName="expirationDate"
+          (input)="onDateChange($event)"
+          type="datetime-local"
+          matInput
+          placeholder="Ex. test Quiz"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status" #status>
+          <mat-option value="public"> Public </mat-option>
+          <mat-option value="private"> Private </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </article>
+    <article class="container question-group">
+      <h2>Questions</h2>
+      <mat-divider></mat-divider>
+      <button
+        (click)="addNewQuestion()"
+        type="button"
+        mat-raised-button
+        class="add-new-btn"
+        color="primary"
+      >
+        Add Question
+      </button>
+      <article formArrayName="quizQuestiions">
+        <div
+          [ngStyle]="{
+            'margin-bottom': '50px'
+          }"
+          *ngFor="
+            let question of getAllQuestions().controls;
+            let questionIndex = index
+          "
+          [formGroupName]="questionIndex"
+        >
+          <button
+            (click)="deleteQuestion(questionIndex)"
+            type="button"
+            mat-raised-button
+            color="warn"
+          >
+            X
+          </button>
+          <br />
+          <br />
+          <div class="upload-pic-box">
+            <label>Upload Question's Photo, If needed</label>
+            <input
+              #questionImgInp
+              style="display: 'none'"
+              formControlName="image"
+              type="text"
+            />
+            <input
+              (change)="
+                onQuestionImageUpload($event, questionImgInp, questionIndex)
+              "
+              type="file"
+            />
+            <img *ngIf="questionImgInp.value" [src]="questionImgInp.value" />
+          </div>
+          <div class="question-inps-box">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Question</mat-label>
+              <input
+                formControlName="question"
+                matInput
+                placeholder="Ex. test Question?"
+              />
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Points You Can Earn</mat-label>
+              <input
+                formControlName="point"
+                type="number"
+                matInput
+                placeholder="Ex. 2"
+              />
+            </mat-form-field>
+          </div>
+          <button
+            type="button"
+            style="margin-top: '10px'"
+            mat-raised-button
+            class="add-new-btn"
+            (click)="addNewAnswer(questionIndex)"
+          >
+            Add Answer
+          </button>
+          <article formArrayName="answers">
+            <div
+              *ngFor="
+                let answer of getQuestionsAllAnswers(questionIndex).controls;
+                let answerIndex = index
+              "
+              [formGroupName]="answerIndex"
+            >
+              <button
+                (click)="deleteAnswer(questionIndex, answerIndex)"
+                type="button"
+                mat-raised-button
+                color="warn"
+              >
+                Delete Answer
+              </button>
+              <br />
+              <br />
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Answer</mat-label>
+                <input
+                  formControlName="txt"
+                  matInput
+                  placeholder="Ex. test Answer"
+                />
+              </mat-form-field>
+              <div class="correct-check-box">
+                <mat-checkbox formControlName="correct" class="example-margin"
+                  >Correct</mat-checkbox
+                >
+              </div>
+            </div>
+          </article>
+          <mat-divider></mat-divider>
+        </div>
+      </article>
+    </article>
+    <article class="container forWho-group">
+      <h2>Send This Quiz To People</h2>
+      <mat-divider></mat-divider>
+      <button
+        (click)="addNewForWho()"
+        type="button"
+        mat-raised-button
+        class="add-new-btn"
+        color="primary"
+      >
+        Add Emails
+      </button>
+      <article formArrayName="forWho">
+        <div
+          *ngFor="
+            let forWho of getAllForWho().controls;
+            let forWhoIndex = index
+          "
+          style="width: 100%"
+          [formGroupName]="forWhoIndex"
+        >
+          <button
+            (click)="deleteForWho(forWhoIndex)"
+            type="button"
+            mat-raised-button
+            color="warn"
+          >
+            X
+          </button>
+          <mat-form-field
+            style="width: 100%"
+            class="example-full-width"
+            appearance="fill"
+          >
+            <mat-label>Email</mat-label>
+            <input
+              formControlName="email"
+              matInput
+              placeholder="Ex. test@test.com"
+            />
+          </mat-form-field>
+        </div>
+      </article>
+    </article>
+    <button
+      [disabled]="quizForm.invalid || submitBtnCancel"
+      type="submit"
+      mat-raised-button
+      color="primary"
+    >
+      Upload Quiz
+    </button>
+  </form>
+</section>

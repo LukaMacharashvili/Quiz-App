@@ -1,0 +1,33 @@
+<article *ngIf="quizzes.length === 0" class="not-found-box">
+  <img
+    src="https://cdn.dribbble.com/users/88213/screenshots/8560585/media/7263b7aaa8077a322b0f12a7cd7c7404.png?compress=1&resize=768x576&vertical=top"
+    alt="not found message image"
+  />
+</article>
+
+<section *ngIf="quizzes.length > 0" class="card-group">
+  <div *ngFor="let quiz of quizzes">
+    <div class="card">
+      <img class="card-img" [src]="quiz.coverPicture" alt="Card image" />
+      <div class="card-img-overlay">
+        <div class="card-body">
+          <h4 class="card-title">
+            <b>{{ quiz.title }}</b>
+          </h4>
+          <ul>
+            <li>
+              <b>Expiration Date :</b>
+              {{ quiz.expirationDate | date: "dd/MM/yyyy" }}
+            </li>
+            <li><b>Maximum Points You Can Earn :</b> {{ quiz.maxPoint }}</li>
+          </ul>
+          <div class="quiz-btn-group">
+            <button routerLink="/takequiz/{{ quiz._id }}" class="btn">
+              Take Quiz
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
