@@ -34,7 +34,7 @@ function sendVerificationEmail(to, userId, userToken) {
     text: "Email Verification",
     html: `<p>Dear User, please verify your email for Quiz App project.</p>
         <p>
-            This <a href="http://localhost:3000/api/auth/verify/${userId}/${userToken}">link</a> will verify your email address.
+            This <a href="https://protected-inlet-59376.herokuapp.com/api/auth/verify/${userId}/${userToken}">link</a> will verify your email address.
         </p>
         <p>
             If you did not registered on Quiz App project, you can just ignore this message and do not click on the link!
@@ -59,7 +59,7 @@ function sendPasswordResetEmail(to, userId, resetToken) {
     text: "Password Reset",
     html: `<p>Dear User, you requested password reset.</p>
         <p>
-            This <a href="http://localhost:4200/resetpassword/${userId}/${resetToken}">link</a> will help you to reset your password.
+            This <a href="https://quiz-b385b.web.app/resetpassword/${userId}/${resetToken}">link</a> will help you to reset your password.
         </p>
         <p>
             If it was not you, who requested password reset, you can just ignore this message and do not click on the link!
@@ -83,7 +83,7 @@ function sendNewQuizEmail(to, quizId) {
     text: "New Quiz",
     html: `<p>Dear User, Here is the new Quiz for you!</p>
         <p>
-          <a href="http://localhost:4200/takequiz/${quizId}">Link</a> for the Quiz.
+          <a href="https://quiz-b385b.web.app/takequiz/${quizId}">Link</a> for the Quiz.
         </p>`,
   };
   transport.sendMail(mailOptions, function (error, result) {
