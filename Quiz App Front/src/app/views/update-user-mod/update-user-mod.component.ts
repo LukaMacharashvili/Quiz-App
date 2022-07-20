@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { LoginLogoutEmitterService } from 'src/app/services/emitter/login-logout-emitter.service';
 import { AuthProxyService } from 'src/app/services/proxy/auth-proxy.service';
 
 @Component({
@@ -20,7 +21,8 @@ export class UpdateUserModComponent implements OnInit {
     private authProxyS: AuthProxyService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private loginoutEmitter: LoginLogoutEmitterService
   ) {}
 
   ngOnInit(): void {
@@ -52,6 +54,7 @@ export class UpdateUserModComponent implements OnInit {
               'Link Has Been Sent On Your Email, You Can Click On It And Email Will Be Verified!',
               'Ok!'
             );
+            this.loginoutEmitter.loginlogoutEmitter.emit(false);
             this.router.navigate(['login']);
             localStorage.removeItem('jwt');
             this.dialog.closeAll();

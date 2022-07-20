@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardReverseService } from './guards/auth-guard-reverse.service';
 import { AuthGuardService } from './guards/auth-guard.service';
 import { AddNewQuizPgComponent } from './views/add-new-quiz-pg/add-new-quiz-pg.component';
+import { HomePgComponent } from './views/home-pg/home-pg.component';
 import { LoginPgComponent } from './views/login-pg/login-pg.component';
 import { ForyouQuizzesCpgComponent } from './views/profile-pg/foryou-quizzes-cpg/foryou-quizzes-cpg.component';
 import { MyQuizzesCpgComponent } from './views/profile-pg/my-quizzes-cpg/my-quizzes-cpg.component';
@@ -18,6 +19,10 @@ import { TakeTestPgComponent } from './views/take-test-pg/take-test-pg.component
 const routes: Routes = [
   {
     path: '',
+    component: HomePgComponent,
+  },
+  {
+    path: 'register',
     canActivate: [AuthGuardReverseService],
     component: RegisterPgComponent,
   },

@@ -14,7 +14,6 @@ import { ResetPasswordPgComponent } from './views/reset-password-pg/reset-passwo
 import { UpdateUserModComponent } from './views/update-user-mod/update-user-mod.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HeaderComponent } from './views/header/header.component';
 import { MyQuizzesCpgComponent } from './views/profile-pg/my-quizzes-cpg/my-quizzes-cpg.component';
 import { ForyouQuizzesCpgComponent } from './views/profile-pg/foryou-quizzes-cpg/foryou-quizzes-cpg.component';
 import { SearchPgComponent } from './views/search-pg/search-pg.component';
@@ -23,6 +22,7 @@ import { SearchQuizCpgComponent } from './views/search-pg/search-quiz-cpg/search
 import { AddNewQuizPgComponent } from './views/add-new-quiz-pg/add-new-quiz-pg.component';
 import { TakeTestPgComponent } from './views/take-test-pg/take-test-pg.component';
 import { ResultsPgComponent } from './views/results-pg/results-pg.component';
+import { HomePgComponent } from './views/home-pg/home-pg.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,6 @@ import { ResultsPgComponent } from './views/results-pg/results-pg.component';
     RegisterPgComponent,
     ResetPasswordPgComponent,
     UpdateUserModComponent,
-    HeaderComponent,
     MyQuizzesCpgComponent,
     ForyouQuizzesCpgComponent,
     SearchPgComponent,
@@ -43,6 +42,7 @@ import { ResultsPgComponent } from './views/results-pg/results-pg.component';
     AddNewQuizPgComponent,
     TakeTestPgComponent,
     ResultsPgComponent,
+    HomePgComponent,
   ],
   imports: [
     BrowserModule,

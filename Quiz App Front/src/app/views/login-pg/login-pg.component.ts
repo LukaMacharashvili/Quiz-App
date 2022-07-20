@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { LoginLogoutEmitterService } from 'src/app/services/emitter/login-logout-emitter.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { AuthProxyService } from 'src/app/services/proxy/auth-proxy.service';
 import { ForgotPasswordModComponent } from '../forgot-password-mod/forgot-password-mod.component';
@@ -20,7 +21,8 @@ export class LoginPgComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private localStorageS: LocalStorageService
+    private localStorageS: LocalStorageService,
+    private loginoutEmitter: LoginLogoutEmitterService
   ) {}
 
   ngOnInit(): void {}
@@ -38,6 +40,7 @@ export class LoginPgComponent implements OnInit {
       (response: any) => {
         this.localStorageS.setWithExpiry('jwt', response.jwt, 86400000);
         this.snackBar.open('Logged In Successfully!', 'Ok!');
+        this.loginoutEmitter.loginlogoutEmitter.emit(true);
         this.router.navigate(['myprofile']);
       },
       (error) => {

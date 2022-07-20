@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { LoginLogoutEmitterService } from 'src/app/services/emitter/login-logout-emitter.service';
 import { AuthProxyService } from 'src/app/services/proxy/auth-proxy.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class DeleteUserModComponent implements OnInit {
     private authProxyS: AuthProxyService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private loginoutEmitter: LoginLogoutEmitterService
   ) {}
 
   ngOnInit(): void {}
@@ -23,6 +25,7 @@ export class DeleteUserModComponent implements OnInit {
     this.authProxyS.deleteUser().subscribe((response) => {
       localStorage.removeItem('jwt');
       this.snackBar.open('User Has Been Deleted Successfully!', 'Ok!');
+      this.loginoutEmitter.loginlogoutEmitter.emit(false);
       this.router.navigate(['login']);
       this.dialog.closeAll();
     });
