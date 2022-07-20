@@ -4,7 +4,7 @@ Quiz App Created With Mean Stack. When user creates profile, he/she is able to c
 
 # Application Guide
 
-**1.** Go to My [Quiz app](https://quiz-b385b.web.app/register) Website
+**1.** Go to My [Quiz app](https://quiz-b385b.web.app/register) Registration Page
 <br />
 
 **2.** Enter register information and click register. Verification link will be sent on the email
