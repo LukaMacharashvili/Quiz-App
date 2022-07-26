@@ -12,7 +12,7 @@ import { ProfilePgComponent } from './views/profile-pg/profile-pg.component';
 import { RegisterPgComponent } from './views/register-pg/register-pg.component';
 import { ResetPasswordPgComponent } from './views/reset-password-pg/reset-password-pg.component';
 import { UpdateUserModComponent } from './views/update-user-mod/update-user-mod.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyQuizzesCpgComponent } from './views/profile-pg/my-quizzes-cpg/my-quizzes-cpg.component';
 import { ForyouQuizzesCpgComponent } from './views/profile-pg/foryou-quizzes-cpg/foryou-quizzes-cpg.component';
@@ -23,6 +23,8 @@ import { AddNewQuizPgComponent } from './views/add-new-quiz-pg/add-new-quiz-pg.c
 import { TakeTestPgComponent } from './views/take-test-pg/take-test-pg.component';
 import { ResultsPgComponent } from './views/results-pg/results-pg.component';
 import { HomePgComponent } from './views/home-pg/home-pg.component';
+import { LoaderInterceptorService } from './interceptors/loader-interceptor.service';
+import { LoadingService } from './interceptors/loading.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,15 @@ import { HomePgComponent } from './views/home-pg/home-pg.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    LoadingService,
+    LoaderInterceptorService,
+    {
+      useClass: LoaderInterceptorService,
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
